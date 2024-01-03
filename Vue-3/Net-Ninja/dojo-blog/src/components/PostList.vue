@@ -8,6 +8,7 @@
 
 <script>
 import SinglePost from "@/components/SinglePost.vue";
+import {onMounted, onUnmounted, onUpdated} from "vue";
 
 export default {
   name: 'PostList',
@@ -19,7 +20,17 @@ export default {
     }
   },
   setup() {
+    onMounted(() => {
+      console.log('on mounted')
+    });
 
+    onUnmounted(() => {
+      console.log('on unmounted')
+    })
+
+    onUpdated(() => {
+      console.log('on updated')
+    })
   }
 }
 </script>
