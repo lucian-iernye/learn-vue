@@ -1,21 +1,21 @@
 <template>
   <div class="home">
     <h1>Home view</h1>
+    <h2>Refs</h2>
+    <p>Ninja one: {{ ninjaOne.name }} - {{ ninjaOne.age }}. And ref name: {{ ninjaOneName }}</p>
+    <button @click="updateNinjaOne">Update ninja one to Lucian</button>
 
-<!--    <pre>Name: {{ name }}</pre>-->
-<!--    <pre>Age: {{ age }}</pre>-->
+    <h2>Reactive</h2>
+    <p>Ninja two: {{ ninjaTwo.name }} - {{ ninjaTwo.age }}. And reactive name: {{ ninjaTwoName }}</p>
+    <button @click="updateNinjaTwo">Update ninja two to Lucian</button>
 
-    <p ref="para">My name is {{ name }} and my age is {{ age }}</p>
 
-    <button @click="handleClick">Click me</button>
-
-    <input type="text" name="" id="" v-model="name">
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { ref } from "vue";
+import {reactive, ref} from "vue";
 
 export default {
   name: 'HomeView',
@@ -23,19 +23,24 @@ export default {
 
   },
   setup() {
-    // this make the values reactive
-    let name = ref('mario');
-    let age = ref(30);
 
-    const handleClick = () => {
-      name.value = 'Lucian'
-      age.value = 35;
-      // this changed the values
+    const ninjaOne = ref({ name: 'mario', age: 30 })
+    const ninjaTwo = reactive({ name: 'luigi', age: 35 })
+
+    let ninjaOneName = ref('mario')
+    let ninjaTwoName = reactive('luigi') // invalid data type
+
+    const updateNinjaOne = () => {
+      ninjaOne.value.age = 40;
+      ninjaOneName.value = 'lucian'
     }
 
-    const para = ref(null);
+    const updateNinjaTwo = () => {
+      ninjaTwo.age = 45;
+      ninjaTwoName = 'lucian'
+    }
 
-    return { name, age, handleClick, para }
+    return { ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo, ninjaOneName, ninjaTwoName }
   }
 }
 </script>
