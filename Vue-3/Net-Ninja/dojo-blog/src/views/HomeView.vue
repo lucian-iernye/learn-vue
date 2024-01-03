@@ -3,6 +3,7 @@
     <h1>Home view</h1>
     <input type="text" name="" id="" v-model="search">
     <p>searching for ... {{ search }}</p>
+    <button @click="stopWatchers">Stop watching</button>
 
     <div v-for="(name, index) in matchingNames" :key="index">
       <p>{{name}}</p>
@@ -23,12 +24,12 @@ export default {
     const search = ref('');
     const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach']);
 
-    watch(search, () => {
+    const stopWatch = watch(search, () => {
       console.log('watching...')
     })
 
     // runs once on setup loads and run every time when a value which gets modified it's used inside
-    watchEffect(() => {
+    const stopEffect = watchEffect(() => {
       console.log('watch effect', search.value)
     })
 
@@ -38,7 +39,12 @@ export default {
       })
     })
 
-    return { search, names, matchingNames }
+    const stopWatchers = () => {
+      stopWatch()
+      stopEffect()
+    }
+
+    return { search, names, matchingNames, stopWatchers }
   }
 }
 </script>
