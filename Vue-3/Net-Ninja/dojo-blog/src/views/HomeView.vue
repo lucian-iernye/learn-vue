@@ -8,6 +8,8 @@
     <p ref="para">My name is {{ name }} and my age is {{ age }}</p>
 
     <button @click="handleClick">Click me</button>
+
+    <input type="text" name="" id="" v-model="name">
   </div>
 </template>
 
