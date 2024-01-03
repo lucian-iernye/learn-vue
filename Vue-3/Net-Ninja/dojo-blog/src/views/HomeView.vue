@@ -21,16 +21,14 @@ export default {
 
   },
   setup() {
-
-    let name = 'mario';
-    let age = 30;
+    // this make the values reactive
+    let name = ref('mario');
+    let age = ref(30);
 
     const handleClick = () => {
-      console.log(para.value)
-
-      para.value = 'new value' // not gonna change. this is only useful to add/change classes
-
-      console.log(para.value)
+      name.value = 'Lucian'
+      age.value = 35;
+      // this changed the values
     }
 
     const para = ref(null);
