@@ -12,7 +12,7 @@
 
 <script>
 // @ is an alias to /src
-import {computed, reactive, ref} from "vue";
+import {computed, reactive, ref, watch, watchEffect} from "vue";
 
 export default {
   name: 'HomeView',
@@ -22,6 +22,15 @@ export default {
   setup() {
     const search = ref('');
     const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach']);
+
+    watch(search, () => {
+      console.log('watching...')
+    })
+
+    // runs once on setup loads and run every time when a value which gets modified it's used inside
+    watchEffect(() => {
+      console.log('watch effect', search.value)
+    })
 
     const matchingNames = computed(() => {
       return names.value.filter(name => {
